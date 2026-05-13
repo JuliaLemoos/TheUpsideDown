@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso ao portal</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="caixa">
+
+        <p class="cidade">Mundo Invertido</p>
+        <h1 class="titulo">Acessar o portal</h1>
+        <p class="descricao">Bem-vindo de volta, sobrevivente!</p>
+
+        <div class="linha-vermelha"></div>
+
+        <p class="rotulo">Email</p>
+        <input type="email" id="email" placeholder="seu@email.com" class="campo" />
+
+        <p class="rotulo">Senha</p>
+        <input type="password" id="senha" placeholder="••••••••" class="campo" />
+
+        <button class="botao-entrar" onclick="entrar()">Entrar</button>
+
+        <p class="texto-cadastro">Não tem uma conta? <span onclick="alert('Indo para o cadastro...')">Fazer cadastro</span></p>
+
+        <p id="mensagem" class="mensagem"></p>
+
+    </div>
+
+    <script>
+        function escolher(botao) {
+            var todos = document.querySelectorAll('.temporada');
+            for (var i = 0; i < todos.length; i++) {
+                todos[i].classList.remove('selecionado');
+            }
+            botao.classList.add('selecionado');
+        }
+
+        function cadastrar() {
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var senha = document.getElementById('senha').value;
+            var selecionado = document.querySelector('.selecionado');
+            var msg = document.getElementById('mensagem');
+
+            if (nome == '' || email == '' || senha == '') {
+                msg.textContent = 'Preencha todos os campos!';
+                return;
+            }
+            if (selecionado == null) {
+                msg.textContent = 'Escolha uma temporada favorita!';
+                return;
+            }
+
+            msg.textContent = 'Bem-vindo, ' + nome + '!';
+        }
+    </script>
+
+</body>
+</html>
