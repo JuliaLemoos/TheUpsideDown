@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro ao mundo invertido</title>
+    <link rel="stylesheet" href="cadastro.css">
+</head>
+
+<body>
+    <div class="caixa">
+
+        <p class="cidade">Hawkins, Indiana</p>
+        <h1 class="titulo">Entrar no grupo</h1>
+        <p class="descricao">Crie sua conta para explorar o Mundo Invertido</p>
+
+        <div class="linha-vermelha"></div>
+
+        <p class="rotulo">Nome</p>
+        <input type="text" id="nome" placeholder="Seu nome" class="campo" />
+
+        <p class="rotulo">Email</p>
+        <input type="email" id="email" placeholder="seu@email.com" class="campo" />
+
+        <p class="rotulo">Senha</p>
+        <input type="password" id="senha" placeholder="••••••••" class="campo" />
+
+        <p class="rotulo">Sua temporada favorita</p>
+
+        <div class="grade-temporadas">
+            <button class="temporada" onclick="escolher(this)">Temporada 1</button>
+            <button class="temporada" onclick="escolher(this)">Temporada 2</button>
+            <button class="temporada" onclick="escolher(this)">Temporada 3</button>
+            <button class="temporada" onclick="escolher(this)">Temporada 4</button>
+            <button class="temporada temporada-ultima" onclick="escolher(this)">Temporada 5</button>
+        </div>
+
+        <button class="botao-cadastrar" onclick="cadastrar()">Cadastrar</button>
+
+        <p class="texto-login">Já tem conta? <span onclick="alert('Indo para o login...')">Fazer login</span></p>
+
+        <p id="mensagem" class="mensagem"></p>
+
+    </div>
+
+    <script>
+        function escolher(botao) {
+            var todos = document.querySelectorAll('.temporada');
+            for (var i = 0; i < todos.length; i++) {
+                todos[i].classList.remove('selecionado');
+            }
+            botao.classList.add('selecionado');
+        }
+
+        function cadastrar() {
+            var nome = document.getElementById('nome').value;
+            var email = document.getElementById('email').value;
+            var senha = document.getElementById('senha').value;
+            var selecionado = document.querySelector('.selecionado');
+            var msg = document.getElementById('mensagem');
+
+            if (nome == '' || email == '' || senha == '') {
+                msg.textContent = 'Preencha todos os campos!';
+                return;
+            }
+            if (selecionado == null) {
+                msg.textContent = 'Escolha uma temporada favorita!';
+                return;
+            }
+
+            msg.textContent = 'Bem-vindo, ' + nome + '!';
+        }
+    </script>
+
+</body>
+
+</html>
