@@ -180,14 +180,14 @@ body {
 }
 
 .formulario input {
-  border: 2px solid #32b9cd;
+  border: 2px solid #4e0909;
   text-align: center;
   border-radius: 10px;
   margin: 0;
 }
 
 .formulario select {
-  border: 2px solid #32b9cd;
+  border: 2px solid #4e0909;
   background-color: white;
   color: gray;
   height: 36px;
@@ -582,24 +582,6 @@ input {
   margin: 0 !important;
   line-height: 1.6;
   width: 50% !important;
-}
-
-.banner-btn {
-  display: inline-block;
-  margin-top: 8px;
-  padding: 12px 28px;
-  background: #4e0909;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 1px;
-  border-radius: 3px;
-  transition: background 0.2s;
-}
-
-.banner-btn:hover {
-  background: #7a1010;
 }
 
 .introducao-section,
