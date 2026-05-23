@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Upside Down | Login</title>
+    <script src="./js/sessao.js"></script>
+    <link rel="stylesheet" href="./css/estilo.css">
+    <link rel="icon" href="./assets/icon/favicon2.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+    <div class="header">
+        <div class="container">
+            <h1 class="titulo">The Upside Down</h1>
+            <ul class="navbar">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="quiz.html">Quiz</a></li>
+                <li>|</li>
+                <li class="agora"><a href="#">Login</a></li>
+                <li><a href="cadastro.html">Cadastro</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="login">
+        <div class="alerta_erro">
+            <div class="card_erro" id="cardErro">
+                <span id="mensagem_erro"></span>
+            </div>
+        </div>
+        <div class="container">
+            <div class="card card-login">
+                <p class="cidade">Mundo Invertido</p>
+                <h2>Acessar o portal</h2>
+                <p class="descricao">Bem-vindo de volta, sobrevivente!</p>
+                <div class="formulario">
+                    <div class="campo">
+                        <span>E-mail:</span>
+                        <input id="email_input" type="email" placeholder="meuemail@tud.com">
+                    </div>
+                    <div class="campo">
+                        <span>Senha:</span>
+                        <input id="senha_input" type="password" placeholder="******">
+                    </div>
+                    <p class="texto-login">Não tem conta? <a href="cadastro.html">Cadastre-se</a></p>
+                    <button type="button" class="botao" onclick="entrar()">Entrar</button>
+                </div>
+
+                <div id="div_aguardar" class="loading-div">
+                    <img src="./assets/circle-loading.gif" id="loading-gif">
+                </div>
+                <div id="div_erros_login"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <h4>Feito com amor por Júlia Lemos &hearts; SPTech &copy; 2026</h4>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function entrar() {
+        aguardar();
+
+        var emailVar = document.getElementById("email_input").value;
+        var senhaVar = document.getElementById("senha_input").value;
+
+        if (emailVar == "" || senhaVar == "") {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML = "Preencha todos os campos!";
+            finalizarAguardar();
+            return false;
+        }
+
+        setInterval(sumirMensagem, 5000);
+
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                emailServer: emailVar,
+                senhaServer: senhaVar
+            })
+        })
+            .then(function (resposta) {
+                if (resposta.ok) {
+                    resposta.json().then(function (json) {
+                        sessionStorage.setItem("EMAIL_USUARIO", json.email);
+                        sessionStorage.setItem("NOME_USUARIO", json.nome);
+                        sessionStorage.setItem("ID_USUARIO", json.id);
+
+                        setTimeout(function () {
+                            window.location = "index.html";
+                        }, 1000);
+                    });
+                } else {
+                    resposta.text().then(function (texto) {
+                        finalizarAguardar(texto);
+                        cardErro.style.display = "block";
+                        mensagem_erro.innerHTML = texto || "E-mail ou senha incorretos!";
+                    });
+                }
+            })
+            .catch(function (erro) {
+                console.log(erro);
+                finalizarAguardar();
+            });
+
+        return false;
+    }
+
+    function sumirMensagem() {
+        cardErro.style.display = "none";
+    }
+</script>

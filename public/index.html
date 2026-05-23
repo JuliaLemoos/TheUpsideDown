@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>The Upside Down | Página Inicial</title>
+
+  <script src="./js/sessao.js"></script>
+
+  <link rel="stylesheet" href="./css/estilo.css">
+  <link rel="icon" href="./assets/icon/favicon2.ico">
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+</head>
+
+<body>
+  <div class="header">
+    <div class="container">
+      <h1 class="titulo">The Upside Down</h1>
+      <ul class="navbar">
+        <li class="agora"><a href="#">Home</a></li>
+        <li><a href="quiz.html">Quiz</a></li>
+        <li>|</li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="cadastro.html">Cadastro</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="banner">
+    <div class="container banner-conteudo">
+      <h2 class="banner-frase">
+        Nem todo monstro vive no escuro: <br>
+        <span>alguns moram bem ao lado.</span>
+      </h2>
+      <p class="banner-descricao">
+        1983. Hawkins, Indiana. Um garoto desaparece.<br>
+        Uma menina sem nome aparece. E o mundo nunca mais será o mesmo.
+      </p>
+      <a href="#introducao" class="banner-btn">Explorar ↓</a>
+    </div>
+  </div>
+  <div class="social introducao-section">
+    <div class="container">
+      <div class="boxes introducao-boxes">
+        <div class="introducao-texto">
+          <h2>Hawkins, Indiana.</h2>
+          <p>
+            Uma cidade comum, amigos inseparáveis, e um segredo enterrado
+            fundo demais para ficar escondido. Stranger Things é sobre o que
+            acontece quando o mundo que você conhece começa a rachar.
+          </p>
+        </div>
+        <div class="introducao-imagem">
+          <img src="assets/imgs/DemogorgonFundo.png" alt="Demogorgon">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social temporadas-section">
+    <div class="container">
+      <div class="boxes" style="flex-direction: column; width: 100%;">
+        <h2 class="titulo-secao">SEASONS</h2>
+        <div class="boxes">
+
+          <div class="box card-temporada">
+            <img src="assets/imgs/temporada1.jpg" alt="Temporada 1">
+            <h4>1983</h4>
+            <p>Will Byers desaparece. Eleven foge do laboratório. O Mundo Invertido se revela pela primeira vez.</p>
+          </div>
+
+          <div class="box card-temporada">
+            <img src="assets/imgs/temporada2.jpg" alt="Temporada 2">
+            <h4>1984</h4>
+            <p>Will retorna marcado. O Devorador de Mentes ameaça Hawkins de dentro pra fora.</p>
+          </div>
+
+          <div class="box card-temporada">
+            <img src="assets/imgs/temporada3.jpg" alt="Temporada 3">
+            <h4>1985</h4>
+            <p>O verão esconde um perigo no Starcourt Mall. Os soviéticos tentam reabrir o portal.</p>
+          </div>
+
+          <div class="box card-temporada">
+            <img src="assets/imgs/temporada4.jpg" alt="Temporada 4">
+            <h4>1986</h4>
+            <p>O grupo está separado. Vecna assombra adolescentes através de traumas e visões.</p>
+          </div>
+
+          <div class="box card-temporada">
+            <img src="assets/imgs/temporada5.jpg" alt="Temporada 5">
+            <h4>1987</h4>
+            <p>O confronto definitivo. O destino de Hawkins — e do mundo — será decidido.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="social viloes-section">
+    <div class="container">
+      <div class="boxes" style="flex-direction: column; width: 100%;">
+        <h2 class="titulo-secao">OS VILÕES</h2>
+
+        <div class="card-vilao">
+          <img src="assets/imgs/VilaoDemogorgon.jpg" alt="Demogorgon" class="vilao-foto">
+          <div class="vilao-texto">
+            <h4>Demogorgon</h4>
+            <p>Criatura sem rosto originária do Mundo Invertido. Caça usando o olfato e é atraída pelo sangue. Foi o
+              primeiro grande terror que Hawkins enfrentou.</p>
+          </div>
+        </div>
+
+        <div class="card-vilao">
+          <img src="assets/imgs/VilaoMindFlayer.jpg" alt="Mind Flayer" class="vilao-foto">
+          <div class="vilao-texto">
+            <h4>Devorador de Mentes</h4>
+            <p>Uma entidade colossal que domina criaturas do Mundo Invertido como extensões de si mesmo. Sua influência
+              sobre Will quase destruiu Hawkins.</p>
+          </div>
+        </div>
+
+        <div class="card-vilao">
+          <img src="assets/imgs/VilaoVecna.jpg" alt="Vecna" class="vilao-foto">
+          <div class="vilao-texto">
+            <h4>Vecna</h4>
+            <p>O vilão mais pessoal da série. Com poderes psíquicos, ele explora traumas e culpa para destruir suas
+              vítimas de dentro pra fora.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <div class="social enquete-section">
+    <div class="container">
+      <div class="boxes" style="flex-direction: column; width: 100%; align-items: center;">
+        <h2 class="titulo-secao">QUAL É O SEU PERSONAGEM FAVORITO?</h2>
+        <p class="enquete-subtitulo">Vote no seu favorito de Hawkins</p>
+
+        <div id="enquete-bloqueio" style="display:none; text-align:center;">
+          <p style="color:#666; font-size:14px; margin-bottom:16px;">Você precisa estar logado para votar.</p>
+          <a href="login.html" class="banner-btn">Fazer login</a>
+        </div>
+
+        <div id="enquete-opcoes" style="display:none;">
+          <div class="enquete-opcoes">
+            <button type="button" class="botao btn-enquete" onclick="favorito(this, 1, 'Eleven')">Eleven</button>
+            <button type="button" class="botao btn-enquete" onclick="favorito(this, 2, 'Mike')">Mike</button>
+            <button type="button" class="botao btn-enquete" onclick="favorito(this, 3, 'Dustin')">Dustin</button>
+            <button type="button" class="botao btn-enquete" onclick="favorito(this, 4, 'Lucas')">Lucas</button>
+            <button type="button" class="botao btn-enquete" onclick="favorito(this, 5, 'Will')">Will</button>
+            <button type="button" class="botao btn-enquete" onclick="favorito(this, 6, 'Max')">Max</button>
+          </div>
+        </div>
+
+        <div id="enquete-resultado" style="display:none; margin-top: 20px;">
+          <p style="color:#aaa;">Você votou em: <strong id="enquete-escolha" style="color:#a81919;"></strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="container">
+      <h4>Feito com amor por Júlia Lemos &hearts; SPTech &copy; 2026</h4>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      var logado = sessionStorage.getItem("ID_USUARIO");
+      if (logado) {
+        document.getElementById("enquete-opcoes").style.display = "block";
+        document.getElementById("enquete-bloqueio").style.display = "none";
+      } else {
+        document.getElementById("enquete-opcoes").style.display = "none";
+        document.getElementById("enquete-bloqueio").style.display = "block";
+      }
+    };
+
+    function favorito(btn, idPersonagemFavorito, nome) {
+      var idUsuarioLogado = sessionStorage.ID_USUARIO;
+
+      if (!idUsuarioLogado) {
+        alert("Você precisa estar logado para votar.")
+        window.location = "login.html";
+        return;
+      }
+
+      fetch("/favorito/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          idUsuarioServer: idUsuarioLogado,
+          idPersonagemFavoritoServer: idPersonagemFavorito
+        })
+      })
+        .then(function (resposta) {
+          if (resposta.ok) {
+            document.querySelectorAll(".btn-enquete").forEach(function (b) {
+              b.disabled = true;
+              b.classList.remove("btn-enquete-selecionado");
+            });
+            btn.classList.add("btn-enquete-selecionado");
+            document.getElementById("enquete-escolha").textContent = nome;
+            document.getElementById("enquete-resultado").style.display = "block";
+            document.getElementById("enquete-opcoes").style.display = "none";
+          } else {
+            alert("Erro ao salvar seu personagem favorito.");
+          }
+        })
+        .catch(function (erro) {
+          console.log("Erro: " + erro)
+        });
+    }
+  </script>
+</body>
+
+</html>
