@@ -44,7 +44,7 @@ FOREIGN KEY (idTemporadaAparicao) REFERENCES temporadas(id)
 CREATE TABLE perguntas_quiz (
 id INT PRIMARY KEY,
 textoPergunta VARCHAR(200) NOT NULL,
-correta VARCHAR(15)
+correta VARCHAR(45)
 );
 
 CREATE TABLE respostas_usuario_quiz (
@@ -66,8 +66,8 @@ dtRealizacao DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
 FOREIGN KEY (idUsuario) REFERENCES usuarios(id)
 );
 
-INSERT INTO temporadas (idTemporada, titulo, descricao) VALUES
-(1, 'Stranger Things', 'O desaparecimento de Will Byers e a chegada de Eleven.'),
+INSERT INTO temporadas (id, titulo, descricao) VALUES
+(1, 'Stranger Things 1', 'O desaparecimento de Will Byers e a chegada de Eleven.'),
 (2, 'Stranger Things 2', 'As consequências do Mundo Invertido e a chegada de novos personagens.'),
 (3, 'Stranger Things 3', 'O verão de 1985 e um novo perigo espreitando Starcourt Mall.'),
 (4, 'Stranger Things 4', 'A divisão do grupo e a ameaça de Vecna.'),
@@ -78,65 +78,71 @@ INSERT INTO personagens (nome, anoNascimento, sobre) VALUES
 ('Mike Wheeler','1971', 'Um dos amigos de Will e interesse amoroso de Eleven.'),
 ('Dustin Henderson', '1971', 'O cérebro do grupo, com paixão por ciência.'),
 ('Lucas Sinclair', '1971', 'O realista do grupo, mestre do estilingue.'),
-('Will Byers', '1971', 'O garoto que desapareceu e foi resgatado do Mundo Invertido.');
+('Will Byers', '1971', 'O garoto que desapareceu e foi resgatado do Mundo Invertido.'),
+('Max Mayfield', '1971', 'Uma skatista durona que se junta ao grupo e adora videogames.');
 
 INSERT INTO viloes (nome, descricao, idTemporadaAparicao) VALUES
 ('Demogorgon', 'Criatura do Mundo Invertido que caça em Hawkins.', 1),
 ('Devorador de Mentes', 'Entidade maligna do Mundo Invertido que controla criaturas.', 2),
 ('Vecna', 'Um ser poderoso do Mundo Invertido com habilidades psíquicas.', 4);
 
-INSERT INTO perguntas_quiz (idPergunta, textoPergunta) VALUES
-(1, 'Qual o nome da cidade onde se passa Stranger Things?'),
-(2, 'Qual jogo os amigos costumam jogar juntos?'),
-(3, 'Qual é o nome do mundo paralelo da série?'),
-(4, 'Qual personagem possui poderes telecinéticos?'),
-(5, 'Quem desaparece no início da primeira temporada?'),
-(6, 'Qual é o nome do monstro da primeira temporada?'),
-(7, 'Qual comida Eleven ama?'),
-(8, 'Quem é o chefe de polícia de Hawkins que ajudou a encontrar Will?'),
-(9, 'Quais personagens trabalham na sorveteria Scoops Ahoy?'),
-(10, 'Quem é o principal vilão da quarta temporada?');
-
-INSERT INTO respostas_quiz (idPergunta, textoResposta, correta) VALUES
-(1, 'Hawkins', TRUE),
-(1, 'Springfield', FALSE),
-(1, 'Riverdale', FALSE),
-(1, 'Las Vegas', FALSE),
-(2, 'Monopoly', FALSE),
-(2, 'Xadrez', FALSE),
-(2, 'Dungeons & Dragons', TRUE),
-(2, 'Uno', FALSE),
-(3, 'Mundo Invertido', TRUE),
-(3, 'Submundo', FALSE),
-(3, 'Dimensão Sombria', FALSE),
-(3, 'Vale das Sombras', FALSE),
-(4, 'Max', FALSE),
-(4, 'Nancy ', FALSE),
-(4, 'Eleven', TRUE),
-(4, 'Robin', FALSE),
-(5, 'Dustin', FALSE),
-(5, 'Mike', FALSE),
-(5, 'Lucas', FALSE),
-(5, 'Will', TRUE),
-(6, 'Vecna', FALSE),
-(6, 'Demogorgon', TRUE),
-(6, 'Mind Flayer', FALSE),
-(6, 'Shadow', FALSE),
-(7, 'Pizza', FALSE),
-(7, 'Hambúrguer', FALSE),
-(7, 'Waffles', TRUE),
-(7, 'Sorvete', FALSE),
-(8, 'Hopper', TRUE),
-(8, 'Steve', FALSE),
-(8, 'Jonathan', FALSE),
-(8, 'Murray', FALSE),
-(9, 'Nancy e Jonathan', FALSE),
-(9, 'Steve e Robin', TRUE),
-(9, 'Dustin e Lucas', FALSE),
-(9, 'Mike e Max', FALSE),
-(10, 'Demogorgon', FALSE),
-(10, 'Mind Flayer', FALSE),
-(10, 'Vecna', TRUE),
-(10, 'Billy', FALSE);
+INSERT INTO perguntas_quiz (id, textoPergunta, correta) VALUES
+(1, 'Qual o nome da cidade onde se passa Stranger Things?', 'Hawkins'),
+(2, 'Qual jogo os amigos costumam jogar juntos?', 'Dungeons & Dragons'),
+(3, 'Qual é o nome do mundo paralelo da série?', 'Mundo Invertido'),
+(4, 'Qual personagem possui poderes telecinéticos?', 'Eleven'),
+(5, 'Quem desaparece no início da primeira temporada?', 'Will'),
+(6, 'Qual é o nome do monstro da primeira temporada?', 'Demogorgon'),
+(7, 'Qual comida Eleven ama?', 'Waffles'),
+(8, 'Quem é o chefe de polícia de Hawkins que ajudou a encontrar Will?', 'Hopper'),
+(9, 'Quais personagens trabalham na sorveteria Scoops Ahoy?', 'Steve e Robin'),
+(10, 'Quem é o principal vilão da quarta temporada?', 'Vecna');
 
 SELECT * FROM usuarios;
+SELECT * FROM personagens;
+SELECT * FROM viloes;
+SELECT * FROM usuario_personagens_favoritos;
+SELECT * FROM pontuacoes_quiz;
+
+-- nome, email, temporada e personagem favorito, total de acertos
+SELECT u.nome, u.email, u.idTemporadaFavorita, us.idPersonagemFavorito, p.totalAcertos
+FROM usuarios u 
+LEFT JOIN usuario_personagens_favoritos us
+ON us.idUsuario = u.id
+LEFT JOIN pontuacoes_quiz p
+ON p.idUsuario = u.id;
+
+-- Qual personagem tem mais votos?
+SELECT p.nome, COUNT(upf.idUsuario) AS totalVotos
+FROM personagens p
+INNER JOIN usuario_personagens_favoritos upf ON upf.idPersonagemFavorito = p.id
+GROUP BY p.nome
+ORDER BY totalVotos DESC;
+
+-- Qual temporada é a favorita dos usuários?
+SELECT t.titulo, COUNT(u.id) AS totalFas
+FROM temporadas t
+INNER JOIN usuarios u ON u.idTemporadaFavorita = t.id
+GROUP BY t.titulo
+ORDER BY totalFas DESC;
+
+-- Ranking dos jogadores com a melhor pontuação e quantas vezes jogaram.
+SELECT u.nome, MAX(p.totalAcertos) AS melhorPontuacao, 
+	COUNT(p.id) AS vezesJogou
+FROM usuarios u
+INNER JOIN pontuacoes_quiz p ON p.idUsuario = u.id
+GROUP BY u.nome
+ORDER BY melhorPontuacao DESC;
+
+-- Média de acertos, erros e o percentual médio de aproveitamento de todos os jogadores.
+SELECT 
+ROUND(AVG(totalAcertos), 1) AS mediaAcertos,
+ROUND(AVG(totalPerguntas - totalAcertos), 1) AS mediaErros,
+ROUND(AVG(totalAcertos) / AVG(totalPerguntas) * 100, 1) AS percentualMedio
+FROM pontuacoes_quiz;
+
+-- Cada vilão e primeira temporada de aparição.
+SELECT v.nome AS vilao, v.descricao, t.titulo AS temporada
+FROM viloes v
+INNER JOIN temporadas t ON t.id = v.idTemporadaAparicao
+ORDER BY t.id;
