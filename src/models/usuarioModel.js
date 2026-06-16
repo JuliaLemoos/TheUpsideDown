@@ -11,7 +11,6 @@ function autenticar(email, senha) {
 }
 
 function cadastrar(nome, email, senha, idTemporada) {
-    // idTemporadaFavorita é opcional — se não vier, salva NULL
     var valorTemporadaSql = idTemporada === null ? 'NULL' : idTemporada;
 
     var instrucaoSql = `
